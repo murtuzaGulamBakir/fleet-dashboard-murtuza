@@ -1,5 +1,5 @@
 // services/api.ts
-const BASE_URL = "https://case-study-26cf.onrender.com/api";
+const API_BASE_URL = "https://case-study-26cf.onrender.com/api";
 
 async function handleResponse(res: Response) {
     if (!res.ok) {
@@ -10,7 +10,7 @@ async function handleResponse(res: Response) {
 
 export async function fetchVehicles() {
     try {
-        const res = await fetch(`${BASE_URL}/vehicles`, { cache: "no-store" });
+        const res = await fetch(`${API_BASE_URL}/vehicles`, { cache: "no-store" });
         return await handleResponse(res);
     } catch (error) {
         console.error("Failed to fetch vehicles:", error);
@@ -20,7 +20,7 @@ export async function fetchVehicles() {
 
 export async function fetchVehicleById(id: string) {
     try {
-        const res = await fetch(`${BASE_URL}/vehicles/${id}`, {
+        const res = await fetch(`${API_BASE_URL}/vehicles/${id}`, {
             cache: "no-store",
         });
         return await handleResponse(res);
@@ -32,7 +32,7 @@ export async function fetchVehicleById(id: string) {
 
 export async function fetchStatistics() {
     try {
-        const res = await fetch(`${BASE_URL}/statistics`, {
+        const res = await fetch(`${API_BASE_URL}/statistics`, {
             cache: "no-store",
         });
         return await handleResponse(res);
