@@ -103,7 +103,8 @@ export default function FleetStats() {
                     key={"last_update_time"}
                     value={lastUpdated}
                 />{" "}
-                <span style={{ fontSize: 20 }}>•</span> Updates every ~ 3 minutes
+                <span style={{ fontSize: 20 }}>•</span> Updates every ~ 3
+                minutes
             </Box>
         </Box>
     );

@@ -33,7 +33,7 @@ export const vehicleTableColums: TableColumn<Vehicle>[] = [
     {
         label: "Last Update",
         accessor: "lastUpdated",
-        render: (v) => <LastUpdateCell value={v} />,
+        render: (v) => <LastUpdateCell key={'last_update_table'} value={v} />,
     },
 
     {
