@@ -6,6 +6,7 @@ import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import RepeatIcon from "@mui/icons-material/Repeat";
 import { format } from "date-fns";
 import { fetchStatistics } from "@/services/api";
 import { StatsCard } from "./StatsCard";
@@ -103,22 +104,25 @@ export default function FleetStats() {
                 mt={1}
                 component={Paper}
                 display={"flex"}
-                justifyContent="center"
-                padding={1}
-                alignItems="center"
+                flexDirection={"column"}
+                padding={1.5}
                 gap={1}
                 fontSize={14}
                 sx={{ textWrap: "nowrap" }}
                 marginTop={2}
                 fontWeight={500}
             >
-                <AccessTimeIcon fontSize="small" /> Updated
-                <LastUpdateCell
-                    key={"last_update_time"}
-                    value={lastUpdated}
-                />{" "}
-                <span style={{ fontSize: 20 }}>•</span> Updates every ~ 3
-                minutes
+                <Box display="flex" alignItems="center" gap={0.5}>
+                    <AccessTimeIcon fontSize="small" />
+                    Updated{" "}
+                    <LastUpdateCell
+                        key={"last_update_time"}
+                        value={lastUpdated}
+                    />{" "}
+                </Box>
+                <Box display="flex" alignItems="center" gap={0.5}>
+                    <RepeatIcon fontSize="small" /> Updates every ~ 3 minutes
+                </Box>
             </Box>
         </Box>
     );

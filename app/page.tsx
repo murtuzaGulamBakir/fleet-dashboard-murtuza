@@ -31,12 +31,12 @@ export default function HomePage() {
                 border={"1px solid #eee"}
                 px={1}
             >
-                <Box mb={4} flexBasis={"27%"}>
+                <Box mb={4} width={"27%"}>
                     <StatusFilter />
                     <Divider sx={{ my: 2 }} />
                     <FleetStats />
                 </Box>
-                <Box mb={4} flexBasis={"73%"}>
+                <Box mb={4} flexBasis={"73%"} width={"73%"}>
                     <VehicleList />
                 </Box>
             </Box>
