@@ -16,7 +16,7 @@ export default function HomePage() {
 
     return (
         <div style={{ padding: "10px 5px 10px 5px" }}>
-            <Box sx={{ py: 0, textAlign: "left" ,mb : 2}}>
+            <Box sx={{ py: 0, textAlign: "left", mb: 2 }}>
                 <Typography variant="h4" gutterBottom>
                     🚚 Fleet Tracking Dashboard
                 </Typography>
@@ -31,14 +31,12 @@ export default function HomePage() {
                 border={"1px solid #eee"}
                 px={1}
             >
-                {/* ✅ Fleet statistics cards */}
-                <Box mb={4} flexBasis={"30%"}>
+                <Box mb={4} flexBasis={"27%"}>
                     <StatusFilter />
                     <Divider sx={{ my: 2 }} />
                     <FleetStats />
-                    {/* <VehicleDetailGrid /> */}
                 </Box>
-                <Box mb={4} flexBasis={"70%"}>
+                <Box mb={4} flexBasis={"73%"}>
                     <VehicleList />
                 </Box>
             </Box>
