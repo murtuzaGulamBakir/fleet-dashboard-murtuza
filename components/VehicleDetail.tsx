@@ -34,7 +34,54 @@ export default function VehicleDetailDialog({
     vehicle,
 }: VehicleDetailDialogProps) {
     if (!vehicle) return null;
-
+    const DETAIL_CONFIG = [
+        {
+            title: "Status",
+            icon: <DirectionsCarIcon />,
+            getValue: (v: Vehicle) => v.status.toUpperCase(),
+        },
+        {
+            title: "Current Speed",
+            icon: <SpeedIcon />,
+            getValue: (v: Vehicle) => `${v.speed} mph`,
+        },
+        {
+            title: "Driver",
+            icon: <PersonIcon />,
+            getValue: (v: Vehicle) => v.driverName,
+        },
+        {
+            title: "Phone",
+            icon: <PhoneIcon />,
+            getValue: (v: Vehicle) => v.driverPhone,
+        },
+        {
+            title: "Destination",
+            icon: <PlaceIcon />,
+            getValue: (v: Vehicle) => v.destination,
+        },
+        {
+            title: "Location",
+            icon: <PlaceIcon />,
+            getValue: (v: Vehicle) =>
+                `${v.currentLocation.lat}, ${v.currentLocation.lng}`,
+        },
+        {
+            title: "Battery Level",
+            icon: <BatteryChargingFullIcon />,
+            getValue: (v: Vehicle) => `${v.batteryLevel}%`,
+        },
+        {
+            title: "Fuel Level",
+            icon: <LocalGasStationIcon />,
+            getValue: (v: Vehicle) => `${v.fuelLevel}%`,
+        },
+        {
+            title: "Last Updated",
+            icon: <AccessTimeIcon />,
+            getValue: (v: Vehicle) => v.lastUpdated,
+        },
+    ] as const;
     return (
         <Dialog open={open} onClose={onClose} fullWidth maxWidth="sm">
             <DialogTitle
@@ -73,51 +120,14 @@ export default function VehicleDetailDialog({
                     gridTemplateColumns="repeat(auto-fit, minmax(240px, 1fr))"
                     gap={2}
                 >
-                    <DetailCard
-                        title="Status"
-                        value={vehicle.status.toLocaleUpperCase()}
-                        icon={<DirectionsCarIcon />}
-                    />
-                    <DetailCard
-                        title="Current Speed"
-                        value={`${vehicle.speed} mph`}
-                        icon={<SpeedIcon />}
-                    />
-                    <DetailCard
-                        title="Driver"
-                        value={vehicle.driverName}
-                        icon={<PersonIcon />}
-                    />
-                    <DetailCard
-                        title="Phone"
-                        value={vehicle.driverPhone}
-                        icon={<PhoneIcon />}
-                    />
-                    <DetailCard
-                        title="Destination"
-                        value={vehicle.destination}
-                        icon={<PlaceIcon />}
-                    />
-                    <DetailCard
-                        title="Location"
-                        value={`${vehicle.currentLocation.lat}, ${vehicle.currentLocation.lng}`}
-                        icon={<PlaceIcon />}
-                    />
-                    <DetailCard
-                        title="Battery Level"
-                        value={`${vehicle.batteryLevel}%`}
-                        icon={<BatteryChargingFullIcon />}
-                    />
-                    <DetailCard
-                        title="Fuel Level"
-                        value={`${vehicle.fuelLevel}%`}
-                        icon={<LocalGasStationIcon />}
-                    />
-                    <DetailCard
-                        title="Last Updated"
-                        value={vehicle.lastUpdated}
-                        icon={<AccessTimeIcon />}
-                    />
+                    {DETAIL_CONFIG.map(({ title, icon, getValue }) => (
+                        <DetailCard
+                            key={title}
+                            title={title}
+                            value={getValue(vehicle)}
+                            icon={icon}
+                        />
+                    ))}
                 </Box>
             </DialogContent>
         </Dialog>
