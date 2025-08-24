@@ -2,8 +2,20 @@
 
 import { Tooltip } from "@mui/material";
 import { format, formatDistanceToNow } from "date-fns";
+import { useEffect, useState } from "react";
 
 export function LastUpdateCell({ value }: { value: string | null }) {
+    const [, forceUpdate] = useState(0);
+
+    // Re-render every 1 minute
+    useEffect(() => {
+        const interval = setInterval(() => {
+            forceUpdate((c) => c + 1);
+        }, 60_000); // 60 seconds
+
+        return () => clearInterval(interval);
+    }, []);
+
     if (!value) {
         return <span>-</span>;
     }

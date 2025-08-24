@@ -8,8 +8,15 @@ import { Container, Typography, Box, Divider } from "@mui/material";
 import PlaceIcon from "@mui/icons-material/Place";
 import VehicleDetailGrid from "@/components/VehicleDetail";
 import { Vehicle } from "@/types/vehicle";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useFleetStore } from "@/store/fleetStore";
 export default function HomePage() {
+    const initialize = useFleetStore((s) => s.initialize);
+
+    useEffect(() => {
+        initialize();
+    }, [initialize]);
+
     return (
         <div style={{ padding: "10px 5px 10px 5px" }}>
             <Box sx={{ py: 0, textAlign: "left" }}>
@@ -32,15 +39,11 @@ export default function HomePage() {
                     <StatusFilter />
                     <Divider sx={{ my: 2 }} />
                     <FleetStats />
-                    <VehicleDetailGrid
-                        open={false}
-                        onClose={function (): void {
-                            throw new Error("Function not implemented.");
-                        }}
-                        vehicleId={""}
-                    />
+                    {/* <VehicleDetailGrid /> */}
                 </Box>
-                <VehicleList />
+                <Box mb={4} flexBasis={"70%"}>
+                    <VehicleList />
+                </Box>
             </Box>
         </div>
     );

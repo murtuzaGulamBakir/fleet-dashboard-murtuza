@@ -17,28 +17,14 @@ import { vehicleTableColums as columns } from "./VehicleColums.data";
 import { useStatusFilterStore } from "@/store/statusFilterStore";
 import VehicleDetailDialog from "../VehicleDetail";
 import { useVehicleDetailStore } from "@/store/vehicleDetailStore";
+import { useFleetStore } from "@/store/fleetStore";
 
 export default function VehicleList() {
-    const [vehicles, setVehicles] = useState<Vehicle[]>([]);
     const [filteredVehicles, setFilteredVehicles] = useState<Vehicle[]>([]);
-    const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const { vehicles, loadingVehicles } = useFleetStore();
     const { activeStatus, setActiveStatus } = useStatusFilterStore();
     const { vehicle, clearVehicle } = useVehicleDetailStore();
-
-    useEffect(() => {
-        const loadVehicles = async () => {
-            try {
-                const data = await fetchVehicles();
-                setVehicles(data.data);
-            } catch {
-                setError("Could not load vehicles");
-            } finally {
-                setLoading(false);
-            }
-        };
-        loadVehicles();
-    }, []);
 
     useEffect(() => {
         const filteredVehicles = vehicles.filter((vehicle) => {
@@ -48,7 +34,7 @@ export default function VehicleList() {
         setFilteredVehicles(filteredVehicles);
     }, [activeStatus, vehicles]);
 
-    if (loading)
+    if (loadingVehicles)
         return (
             <Typography align="center" sx={{ mt: 3 }}>
                 <CircularProgress />
@@ -62,7 +48,7 @@ export default function VehicleList() {
             </Typography>
         );
 
-    if (!loading && vehicles.length === 0)
+    if (!loadingVehicles && vehicles.length === 0)
         return (
             <Typography align="center" sx={{ mt: 3 }}>
                 No vehicles found.

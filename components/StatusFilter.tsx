@@ -1,12 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Box, Typography, CircularProgress } from "@mui/material";
 import TimelineIcon from "@mui/icons-material/Timeline";
-import { fetchStatistics } from "@/services/api";
-import type { FleetStatistics } from "@/types/statistics";
 import { FilterCard } from "./FilterCard";
 import { useStatusFilterStore } from "@/store/statusFilterStore";
+import { useFleetStore } from "@/store/fleetStore";
 
 const STATUS_CONFIG = [
     { key: "all", label: "All", color: "#9e9e9e" },
@@ -16,20 +15,10 @@ const STATUS_CONFIG = [
 ];
 
 export default function StatusFilter() {
-    const [stats, setStats] = useState<FleetStatistics | null>(null);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState<string | null>(null);
     const { activeStatus, setActiveStatus } = useStatusFilterStore();
+    const { stats, loadingStats } = useFleetStore();
 
-    useEffect(() => {
-        setLoading(true);
-        fetchStatistics()
-            .then(({ data }) => setStats(data))
-            .catch(() => setError("Could not load status counts"))
-            .finally(() => setLoading(false));
-    }, []);
-
-    if (loading) {
+    if (loadingStats) {
         return (
             <Box display="flex" justifyContent="center" mt={2}>
                 <CircularProgress size={20} />
@@ -37,10 +26,10 @@ export default function StatusFilter() {
         );
     }
 
-    if (error || !stats) {
+    if (!stats) {
         return (
             <Typography color="error" align="center" sx={{ mt: 2 }}>
-                {error ?? "No data"}
+                {"No data"}
             </Typography>
         );
     }

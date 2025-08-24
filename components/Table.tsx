@@ -64,7 +64,11 @@ export function DataTable<T extends { id: string | number }>({
                                             col.render(value, row)
                                         ) : (
                                             <Tooltip title={value ?? ""} arrow>
-                                                <span>{value}</span>
+                                                <span
+                                                    style={{ fontWeight: 500 }}
+                                                >
+                                                    {value}
+                                                </span>
                                             </Tooltip>
                                         )}
                                     </TableCell>

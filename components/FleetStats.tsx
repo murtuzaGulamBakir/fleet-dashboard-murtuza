@@ -9,20 +9,29 @@ import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import { format } from "date-fns";
 
 import { fetchStatistics } from "@/services/api";
-import type { FleetStatistics } from "@/types/statistics";
 import { StatsCard } from "./StatsCard";
+import { useFleetStore } from "@/store/fleetStore";
 
 export default function FleetStats() {
-    const [stats, setStats] = useState<FleetStatistics | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
-
+    const { lastUpdated, vehicles, setStats, stats } = useFleetStore();
     useEffect(() => {
-        fetchStatistics()
-            .then(({ data }) => setStats(data))
-            .catch(() => setError("Could not load fleet statistics"))
-            .finally(() => setLoading(false));
-    }, []);
+        const loadStats = async () => {
+            try {
+                setLoading(true);
+                const { data } = await fetchStatistics();
+                setStats(data);
+            } catch (err) {
+                console.error("Failed to fetch fleet statistics:", err);
+                setError("Could not load fleet statistics");
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        loadStats();
+    }, [vehicles]);
 
     if (loading) {
         return (
@@ -71,7 +80,7 @@ export default function FleetStats() {
                 />
                 <StatsCard
                     title="LAST UPDATE"
-                    value={format(new Date(stats.timestamp), "HH:mm")}
+                    value={format(new Date(lastUpdated as string), "HH:mm")}
                     icon={<AccessTimeIcon fontSize="small" />}
                 />
             </Box>
