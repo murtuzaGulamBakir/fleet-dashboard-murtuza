@@ -1,4 +1,3 @@
-// store/vehicleDetailStore.ts
 import { create } from "zustand";
 import type { Vehicle } from "@/types/vehicle";
 

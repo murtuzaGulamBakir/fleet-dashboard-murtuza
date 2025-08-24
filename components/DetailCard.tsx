@@ -7,7 +7,7 @@ interface DetailCardProps {
     title: string;
     value: string | number;
     icon: ReactNode;
-    accentColor?: string; // left line color (defaults to theme primary)
+    accentColor?: string;
 }
 
 export function DetailCard({
@@ -43,7 +43,6 @@ export function DetailCard({
                 },
             }}
         >
-            {/* Title Row */}
             <Box display="flex" alignItems="center" gap={0.5}>
                 <Box sx={{ color: "text.secondary" }}>{icon}</Box>
                 <Typography
@@ -57,7 +56,6 @@ export function DetailCard({
                 </Typography>
             </Box>
 
-            {/* Value */}
             <Typography
                 variant="body1"
                 fontWeight={700}

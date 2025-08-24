@@ -47,12 +47,12 @@ export function DataTable<T extends { id: string | number }>({
                     {data.map((row) => (
                         <TableRow key={row.id}>
                             {columns.map((col) => {
-                                const value = row[col.accessor] as ReactNode; // ✅ Explicit cast
+                                const value = row[col.accessor] as ReactNode;
                                 return (
                                     <TableCell
                                         key={String(col.accessor)}
                                         sx={{
-                                            maxWidth: 130, // 👈 configurable per column
+                                            maxWidth: 130,
                                             whiteSpace: "nowrap",
                                             overflow: "hidden",
                                             textOverflow: "ellipsis",

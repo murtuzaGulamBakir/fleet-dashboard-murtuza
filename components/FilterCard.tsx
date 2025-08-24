@@ -3,8 +3,8 @@
 import { Card, Box, Typography } from "@mui/material";
 
 interface FilterCardProps {
-    title: string; // e.g. "Idle"
-    count: number; // e.g. 6
+    title: string;
+    count: number;
     color: string;
     selected?: boolean;
     onClick?: () => void;

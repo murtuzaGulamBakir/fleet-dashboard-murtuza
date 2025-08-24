@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-type StatusKey = "all" | "idle" | "en_route" | "delivered" | null;
+export type StatusKey = "all" | "idle" | "en_route" | "delivered" | null;
 
 interface StatusFilterState {
     activeStatus: StatusKey;

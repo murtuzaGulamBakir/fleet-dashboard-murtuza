@@ -1,4 +1,3 @@
-// stores/fleetStore.ts
 import { create } from "zustand";
 import type { Vehicle } from "@/types/vehicle";
 import type { FleetStatistics } from "@/types/statistics";
@@ -8,15 +7,12 @@ interface FleetState {
     vehicles: Vehicle[];
     stats: FleetStatistics | null;
     lastUpdated: string | null;
-
     loadingVehicles: boolean;
     loadingStats: boolean;
     error: string | null;
 
-    // Actions
     initialize: () => void;
     setVehicles: (vehicles: Vehicle[]) => void;
-    // updateVehicle: (vehicle: Vehicle) => void;
     setStats: (stats: FleetStatistics) => void;
     setLoadingVehicles: (loading: boolean) => void;
     setLoadingStats: (loading: boolean) => void;

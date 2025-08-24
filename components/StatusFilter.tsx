@@ -1,17 +1,37 @@
 "use client";
 
-import { useState } from "react";
 import { Box, Typography, CircularProgress } from "@mui/material";
 import TimelineIcon from "@mui/icons-material/Timeline";
 import { FilterCard } from "./FilterCard";
-import { useStatusFilterStore } from "@/store/statusFilterStore";
+import { StatusKey, useStatusFilterStore } from "@/store/statusFilterStore";
 import { useFleetStore } from "@/store/fleetStore";
+import { FleetStatistics } from "@/types/statistics";
 
 const STATUS_CONFIG = [
-    { key: "all", label: "All", color: "#9e9e9e" },
-    { key: "idle", label: "Idle", color: "#ff9800" },
-    { key: "en_route", label: "En Route", color: "#2196f3" },
-    { key: "delivered", label: "Delivered", color: "#4caf50" },
+    {
+        key: "all",
+        label: "All",
+        color: "#9e9e9e",
+        getCount: (s: FleetStatistics) => s.total,
+    },
+    {
+        key: "idle",
+        label: "Idle",
+        color: "#ff9800",
+        getCount: (s: FleetStatistics) => s.idle,
+    },
+    {
+        key: "en_route",
+        label: "En Route",
+        color: "#2196f3",
+        getCount: (s: FleetStatistics) => s.en_route,
+    },
+    {
+        key: "delivered",
+        label: "Delivered",
+        color: "#4caf50",
+        getCount: (s: FleetStatistics) => s.delivered,
+    },
 ];
 
 export default function StatusFilter() {
@@ -36,7 +56,6 @@ export default function StatusFilter() {
 
     return (
         <Box mt={2}>
-            {/* Heading */}
             <Box display="flex" alignItems="center" mb={2}>
                 <TimelineIcon sx={{ mr: 1 }} />
                 <Typography variant="h6" fontWeight={600}>
@@ -44,32 +63,16 @@ export default function StatusFilter() {
                 </Typography>
             </Box>
 
-            {/* Grid for two cards per row */}
             <Box display="grid" gridTemplateColumns="repeat(2, 1fr)" gap={2}>
-                {STATUS_CONFIG.map(({ key, label, color }) => (
+                {STATUS_CONFIG.map(({ key, label, color, getCount }) => (
                     <FilterCard
                         key={key}
                         title={label}
-                        count={
-                            key === "all"
-                                ? stats.total
-                                : key === "idle"
-                                ? stats.idle
-                                : key === "en_route"
-                                ? stats.en_route
-                                : stats.delivered
-                        }
+                        count={getCount(stats)}
                         color={color}
                         selected={activeStatus === key}
                         onClick={() =>
-                            setActiveStatus(
-                                key as
-                                    | "all"
-                                    | "idle"
-                                    | "en_route"
-                                    | "delivered"
-                                    | null
-                            )
+                            setActiveStatus(key as typeof activeStatus)
                         }
                     />
                 ))}

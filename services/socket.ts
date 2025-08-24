@@ -2,6 +2,8 @@
 import type { Vehicle } from "@/types/vehicle";
 import type { FleetStatistics } from "@/types/statistics";
 
+const SOCKET_URL = "wss://case-study-26cf.onrender.com/ws";
+
 export type SocketEvent =
     | {
           type: "initial_data";
@@ -31,8 +33,6 @@ type MessageHandler = (event: SocketEvent) => void;
 let socket: WebSocket | null = null;
 let handlers: MessageHandler[] = [];
 let reconnectTimeout: NodeJS.Timeout | null = null;
-
-const SOCKET_URL = "wss://case-study-26cf.onrender.com/ws";
 
 export function connectSocket() {
     if (socket) return;

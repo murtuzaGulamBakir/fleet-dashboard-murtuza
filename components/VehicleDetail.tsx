@@ -25,7 +25,7 @@ import { DetailCard } from "./DetailCard";
 interface VehicleDetailDialogProps {
     open: boolean;
     onClose: () => void;
-    vehicle: Vehicle | null; // pass full vehicle object from parent
+    vehicle: Vehicle | null;
 }
 
 export default function VehicleDetailDialog({

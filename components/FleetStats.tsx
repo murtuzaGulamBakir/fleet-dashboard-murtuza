@@ -7,7 +7,6 @@ import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import { format } from "date-fns";
-
 import { fetchStatistics } from "@/services/api";
 import { StatsCard } from "./StatsCard";
 import { useFleetStore } from "@/store/fleetStore";
@@ -52,6 +51,33 @@ export default function FleetStats() {
 
     if (!stats) return null;
 
+    const statsConfig = [
+        {
+            key: "total",
+            title: "TOTAL FLEET",
+            value: stats.total,
+            icon: <PeopleAltIcon fontSize="small" />,
+        },
+        {
+            key: "avg_speed",
+            title: "AVG. SPEED",
+            value: `${stats.average_speed} km/h`,
+            icon: <TrendingUpIcon fontSize="small" />,
+        },
+        {
+            key: "moving",
+            title: "MOVING",
+            value: stats.en_route,
+            icon: <DirectionsCarIcon fontSize="small" />,
+        },
+        {
+            key: "last_update",
+            title: "LAST UPDATE",
+            value: lastUpdated ? format(new Date(lastUpdated), "HH:mm") : "-",
+            icon: <AccessTimeIcon fontSize="small" />,
+        },
+    ];
+
     return (
         <Box mt={2}>
             {/* Section Heading */}
@@ -64,26 +90,14 @@ export default function FleetStats() {
 
             {/* Stat Cards Grid */}
             <Box display="grid" gridTemplateColumns="repeat(2, 1fr)" gap={2}>
-                <StatsCard
-                    title="TOTAL FLEET"
-                    value={stats.total}
-                    icon={<PeopleAltIcon fontSize="small" />}
-                />
-                <StatsCard
-                    title="AVG. SPEED"
-                    value={stats.average_speed}
-                    icon={<TrendingUpIcon fontSize="small" />}
-                />
-                <StatsCard
-                    title="MOVING"
-                    value={stats.en_route}
-                    icon={<DirectionsCarIcon fontSize="small" />}
-                />
-                <StatsCard
-                    title="LAST UPDATE"
-                    value={format(new Date(lastUpdated as string), "HH:mm")}
-                    icon={<AccessTimeIcon fontSize="small" />}
-                />
+                {statsConfig.map(({ key, title, value, icon }) => (
+                    <StatsCard
+                        key={key}
+                        title={title}
+                        value={value}
+                        icon={icon}
+                    />
+                ))}
             </Box>
             <Box
                 mt={1}
