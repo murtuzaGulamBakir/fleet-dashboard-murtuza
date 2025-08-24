@@ -17,9 +17,8 @@ export type SocketEvent =
       }
     | {
           type: "stats_update";
-          payload: FleetStatistics;
+          data: FleetStatistics;
           timestamp: string;
-          data: Vehicle[];
       }
     | {
           type: "heartbeat";

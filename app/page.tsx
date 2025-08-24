@@ -4,10 +4,7 @@ import { DetailCard } from "@/components/DetailCard";
 import FleetStats from "@/components/FleetStats";
 import StatusFilter from "@/components/StatusFilter";
 import VehicleList from "@/components/VehicleList/VehicleList";
-import { Container, Typography, Box, Divider } from "@mui/material";
-import PlaceIcon from "@mui/icons-material/Place";
-import VehicleDetailGrid from "@/components/VehicleDetail";
-import { Vehicle } from "@/types/vehicle";
+import { Typography, Box, Divider } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useFleetStore } from "@/store/fleetStore";
 export default function HomePage() {
@@ -19,8 +16,8 @@ export default function HomePage() {
 
     return (
         <div style={{ padding: "10px 5px 10px 5px" }}>
-            <Box sx={{ py: 0, textAlign: "left" }}>
-                <Typography variant="h3" gutterBottom>
+            <Box sx={{ py: 0, textAlign: "left" ,mb : 2}}>
+                <Typography variant="h4" gutterBottom>
                     🚚 Fleet Tracking Dashboard
                 </Typography>
                 <Typography variant="subtitle1" color="text.secondary">

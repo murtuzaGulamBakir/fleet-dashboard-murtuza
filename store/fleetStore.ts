@@ -62,7 +62,7 @@ export const useFleetStore = create<FleetState>((set, get) => ({
                         break;
 
                     case "stats_update":
-                        get().setStats(event.payload);
+                        get().setStats(event.data);
                         break;
 
                     case "heartbeat":

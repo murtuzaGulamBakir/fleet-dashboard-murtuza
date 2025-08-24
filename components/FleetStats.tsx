@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Box, Typography, CircularProgress } from "@mui/material";
+import { Box, Typography, CircularProgress, Paper } from "@mui/material";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
@@ -11,6 +11,7 @@ import { format } from "date-fns";
 import { fetchStatistics } from "@/services/api";
 import { StatsCard } from "./StatsCard";
 import { useFleetStore } from "@/store/fleetStore";
+import { LastUpdateCell } from "./VehicleList/TableCells/LastUpdateCell";
 
 export default function FleetStats() {
     const [loading, setLoading] = useState(true);
@@ -83,6 +84,26 @@ export default function FleetStats() {
                     value={format(new Date(lastUpdated as string), "HH:mm")}
                     icon={<AccessTimeIcon fontSize="small" />}
                 />
+            </Box>
+            <Box
+                mt={1}
+                component={Paper}
+                display={"flex"}
+                justifyContent="center"
+                padding={1}
+                alignItems="center"
+                gap={1}
+                fontSize={14}
+                sx={{ textWrap: "nowrap" }}
+                marginTop={2}
+                fontWeight={500}
+            >
+                <AccessTimeIcon fontSize="small" /> Updated
+                <LastUpdateCell
+                    key={"last_update_time"}
+                    value={lastUpdated}
+                />{" "}
+                <span style={{ fontSize: 20 }}>•</span> Updates every ~ 3 minutes
             </Box>
         </Box>
     );
