@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import type { Vehicle } from "@/types/vehicle";
 import type { FleetStatistics } from "@/types/statistics";
-import { connectSocket, SocketEvent, subscribeSocket } from "@/services/socket";
+import { connectSocket, SocketEvent, subscribeSocket } from "@/services/socket/socket";
 
 interface FleetState {
     vehicles: Vehicle[];

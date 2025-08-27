@@ -20,7 +20,7 @@ import SpeedIcon from "@mui/icons-material/Speed";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 
 import type { Vehicle } from "@/types/vehicle";
-import { DetailCard } from "./DetailCard";
+import { DetailCard } from "../VehicleDetailCard";
 
 interface VehicleDetailDialogProps {
     open: boolean;

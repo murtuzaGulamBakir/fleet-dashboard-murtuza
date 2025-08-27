@@ -2,7 +2,7 @@
 "use client";
 
 import { Typography } from "@mui/material";
-import { useVehicleDetailStore } from "@/store/vehicleDetailStore";
+import { useVehicleDetailStore } from "@/store/vehicle/vehiclePopUpStore";
 import type { Vehicle } from "@/types/vehicle";
 
 interface VehicleNumberCellProps {

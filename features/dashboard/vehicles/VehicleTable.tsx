@@ -1,29 +1,20 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { CircularProgress, Typography, Chip, Tooltip } from "@mui/material";
-
-import { fetchVehicles } from "@/services/api";
+import { CircularProgress, Typography } from "@mui/material";
 import type { Vehicle } from "@/types/vehicle";
-import { TableColumn } from "@/types/table";
-import { formatDistanceToNow, format } from "date-fns";
-import { StatusCell } from "./TableCells/StatusCell";
-import { DataTable } from "../Table";
-import { SpeedCell } from "./TableCells/SpeedCell";
-import { EtaCell } from "./TableCells/EtaCell";
-import { LastUpdateCell } from "./TableCells/LastUpdateCell";
-import { LocationCell } from "./TableCells/LocationCell";
-import { vehicleTableColums as columns } from "./VehicleColums.data";
-import { useStatusFilterStore } from "@/store/statusFilterStore";
-import VehicleDetailDialog from "../VehicleDetail";
-import { useVehicleDetailStore } from "@/store/vehicleDetailStore";
-import { useFleetStore } from "@/store/fleetStore";
+import { DataTable } from "../../../components/Table";
+import { vehicleTableColums as columns } from "./components/VehicleTableColums";
+import { useStatusFilterStore } from "@/store/status-filter/statusFilterStore";
+import VehicleDetailDialog from "./components/VehicleDetail/VehicleDetail";
+import { useVehicleDetailStore } from "@/store/vehicle/vehiclePopUpStore";
+import { useFleetStore } from "@/store/fleet/fleetStore";
 
 export default function VehicleList() {
     const [filteredVehicles, setFilteredVehicles] = useState<Vehicle[]>([]);
     const [error, setError] = useState<string | null>(null);
     const { vehicles, loadingVehicles } = useFleetStore();
-    const { activeStatus, setActiveStatus } = useStatusFilterStore();
+    const { activeStatus } = useStatusFilterStore();
     const { vehicle, clearVehicle } = useVehicleDetailStore();
 
     useEffect(() => {

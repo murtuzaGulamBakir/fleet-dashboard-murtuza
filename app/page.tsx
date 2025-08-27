@@ -1,12 +1,10 @@
 "use client";
-
-import { DetailCard } from "@/components/DetailCard";
-import FleetStats from "@/components/FleetStats";
-import StatusFilter from "@/components/StatusFilter";
-import VehicleList from "@/components/VehicleList/VehicleList";
+import { useEffect } from "react";
+import StatusFilter from "@/features/dashboard/status-filter/StatusFilter";
+import VehicleList from "@/features/dashboard/vehicles/VehicleTable";
 import { Typography, Box, Divider } from "@mui/material";
-import { useEffect, useState } from "react";
-import { useFleetStore } from "@/store/fleetStore";
+import { useFleetStore } from "@/store/fleet/fleetStore";
+import FleetStats from "@/features/dashboard/statistics/FleetStats";
 export default function HomePage() {
     const initialize = useFleetStore((s) => s.initialize);
 

@@ -1,8 +1,7 @@
-// services/socket.ts
 import type { Vehicle } from "@/types/vehicle";
 import type { FleetStatistics } from "@/types/statistics";
+import { SOCKET_URL } from "@/config";
 
-const SOCKET_URL = "wss://case-study-26cf.onrender.com/ws";
 
 export type SocketEvent =
     | {

@@ -2,9 +2,9 @@
 
 import { Box, Typography, CircularProgress } from "@mui/material";
 import TimelineIcon from "@mui/icons-material/Timeline";
-import { FilterCard } from "./FilterCard";
-import { StatusKey, useStatusFilterStore } from "@/store/statusFilterStore";
-import { useFleetStore } from "@/store/fleetStore";
+import { FilterCard } from "./components/FilterCard";
+import { StatusKey, useStatusFilterStore } from "@/store/status-filter/statusFilterStore";
+import { useFleetStore } from "@/store/fleet/fleetStore";
 import { FleetStatistics } from "@/types/statistics";
 
 const STATUS_CONFIG = [

@@ -27,7 +27,6 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className={`${geistSans.variable} ${geistMono.variable}`}>
-                {/* ✅ Wrap client side ThemeProvider */}
                 <ClientThemeProvider>{children}</ClientThemeProvider>
             </body>
         </html>

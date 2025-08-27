@@ -11,7 +11,7 @@ export const vehicleTableColums: TableColumn<Vehicle>[] = [
     {
         label: "Vehicle",
         accessor: "vehicleNumber",
-        render: (v,row) => <VehicleNumberCell vehicle={row} />,
+        render: (v, row) => <VehicleNumberCell vehicle={row} />,
     },
     { label: "Driver", accessor: "driverName" },
     {
@@ -33,7 +33,7 @@ export const vehicleTableColums: TableColumn<Vehicle>[] = [
     {
         label: "Last Update",
         accessor: "lastUpdated",
-        render: (v) => <LastUpdateCell key={'last_update_table'} value={v} />,
+        render: (v) => <LastUpdateCell key={"last_update_table"} value={v} />,
     },
 
     {

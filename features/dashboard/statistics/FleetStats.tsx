@@ -8,10 +8,10 @@ import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import RepeatIcon from "@mui/icons-material/Repeat";
 import { format } from "date-fns";
-import { fetchStatistics } from "@/services/api";
-import { StatsCard } from "./StatsCard";
-import { useFleetStore } from "@/store/fleetStore";
-import { LastUpdateCell } from "./VehicleList/TableCells/LastUpdateCell";
+import { fetchStatistics } from "@/services/api/statistics";
+import { useFleetStore } from "@/store/fleet/fleetStore";
+import { StatsCard } from "./components/StatsCard";
+import { LastUpdateCell } from "../vehicles/components/TableCells/LastUpdateCell";
 
 export default function FleetStats() {
     const [loading, setLoading] = useState(true);
