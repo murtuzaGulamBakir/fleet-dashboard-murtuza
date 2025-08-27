@@ -2,7 +2,6 @@ import type { Vehicle } from "@/types/vehicle";
 import type { FleetStatistics } from "@/types/statistics";
 import { SOCKET_URL } from "@/config";
 
-
 export type SocketEvent =
     | {
           type: "initial_data";
@@ -55,6 +54,11 @@ export function connectSocket() {
     socket.onclose = () => {
         console.warn("⚠️ WebSocket closed. Reconnecting in 3s...");
         socket = null;
+
+        if (reconnectTimeout) {
+            clearTimeout(reconnectTimeout);
+        }
+
         reconnectTimeout = setTimeout(connectSocket, 3000);
     };
 

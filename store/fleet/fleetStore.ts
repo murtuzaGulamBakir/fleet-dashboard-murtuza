@@ -1,7 +1,11 @@
 import { create } from "zustand";
 import type { Vehicle } from "@/types/vehicle";
 import type { FleetStatistics } from "@/types/statistics";
-import { connectSocket, SocketEvent, subscribeSocket } from "@/services/socket/socket";
+import {
+    connectSocket,
+    SocketEvent,
+    subscribeSocket,
+} from "@/services/socket/socket";
 
 interface FleetState {
     vehicles: Vehicle[];
@@ -11,7 +15,7 @@ interface FleetState {
     loadingStats: boolean;
     error: string | null;
 
-    initialize: () => void;
+    initialize: () => () => void;
     setVehicles: (vehicles: Vehicle[]) => void;
     setStats: (stats: FleetStatistics) => void;
     setLoadingVehicles: (loading: boolean) => void;
@@ -50,7 +54,7 @@ export const useFleetStore = create<FleetState>((set, get) => ({
         try {
             connectSocket();
 
-            subscribeSocket((event: SocketEvent) => {
+            const unsubscribe = subscribeSocket((event: SocketEvent) => {
                 switch (event.type) {
                     case "initial_data":
                     case "vehicle_update":
@@ -69,8 +73,10 @@ export const useFleetStore = create<FleetState>((set, get) => ({
                         console.warn("Unknown WS event:", event);
                 }
             });
+            return unsubscribe;
         } catch (err: any) {
             set({ error: err.message ?? "WebSocket connection failed" });
+            return () => {};
         }
     },
 }));

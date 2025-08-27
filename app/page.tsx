@@ -9,7 +9,10 @@ export default function HomePage() {
     const initialize = useFleetStore((s) => s.initialize);
 
     useEffect(() => {
-        initialize();
+        const unsubscribe = initialize();
+        return () => {
+            if (unsubscribe) unsubscribe();
+        };
     }, [initialize]);
 
     return (
